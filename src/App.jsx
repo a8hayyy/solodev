@@ -1,72 +1,30 @@
-import { useState, useEffect } from 'react'
 import './App.css'
 
-const BOOT_LINES = [
-  '> initializing solodev.in...',
-  '> loading modules... [OK]',
-  '> compiling projects... [OK]',
-  '> deploying creativity... [OK]',
-  '> system ready.',
-];
-
 function App() {
-  const [bootIndex, setBootIndex] = useState(0);
-  const [bootDone, setBootDone] = useState(false);
-
-  useEffect(() => {
-    if (bootIndex >= BOOT_LINES.length) {
-      const timer = setTimeout(() => setBootDone(true), 500);
-      return () => clearTimeout(timer);
-    }
-    const timer = setTimeout(() => setBootIndex((i) => i + 1), 600);
-    return () => clearTimeout(timer);
-  }, [bootIndex]);
-
   return (
     <div className="container">
-      {/* CRT scanline + vignette overlay */}
-      <div className="crt-overlay" />
-      <div className="scanlines" />
-
-      {/* Animated grid background */}
-      <div className="grid-bg" />
-
       <div className="content">
-        {/* Terminal boot sequence */}
-        <div className="terminal">
-          {BOOT_LINES.slice(0, bootIndex).map((line, i) => (
-            <p key={i} className="terminal-line">{line}</p>
-          ))}
-          {bootIndex < BOOT_LINES.length && <span className="cursor">█</span>}
-        </div>
+        
+        {/* Minimalist SVG Logo */}
+        <svg 
+          className="brand-logo"
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 100 100" 
+          fill="none"
+        >
+          <rect width="100" height="100" rx="24" fill="rgba(255,255,255,0.03)" />
+          <path d="M66 34H36V48H54C59.5228 48 64 52.4772 64 58V66H34" stroke="#FFFFFF" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
 
-        {/* Main content — fades in after boot */}
-        <div className={`main-content ${bootDone ? 'visible' : ''}`}>
-          <h1 className="title" data-text="solodev.in">solodev.in</h1>
-          <p className="subtitle">Building digital things, one pixel at a time.</p>
-
-          <div className="btn-row">
-            <a
-              href="mailto:acuber1728@gmail.com?subject=Hello from solodev.in"
-              className="pixel-btn"
-            >
-              Get in Touch
-            </a>
-            <a href="https://github.com/a8hayyy" target="_blank" rel="noreferrer" className="pixel-btn alt">
-              GitHub
-            </a>
-            <a href="https://1906.in/" target="_blank" rel="noreferrer" className="pixel-btn alt">
-              /x/
-            </a>
-          </div>
-        </div>
+        <h1 className="title">solodev.in</h1>
+        <p className="subtitle">System booting. Projects compiling.</p>
+        
+        <a href="mailto:acuber1728@gmail.com?subject=Hello from solodev.in" className="premium-btn">
+          Get in Touch
+        </a>
       </div>
-
-      {/* Corner status text */}
-      <div className="corner-bl">v1.0.0</div>
-      <div className="corner-br">© {new Date().getFullYear()}</div>
     </div>
-  );
+  )
 }
 
 export default App

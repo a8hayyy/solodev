@@ -1,68 +1,26 @@
-/* Import retro pixel font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+/* Import a premium, clean sans-serif font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
-/* ── Root & Reset ─────────────────────────────────── */
 html, body {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #0a0a0a;
-  color: #00ff41;
-  font-family: 'VT323', monospace;
-  -webkit-font-smoothing: none; 
+  /* Deep, rich dark background with a subtle radial gradient light source at the top */
+  background-color: #050505; 
+  background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #050505 60%);
+  color: #ffffff;
+  /* Premium font stack optimized for macOS, iOS, and high-DPI screens */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; 
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* ── CRT Scanline Overlay ─────────────────────────── */
-.scanlines {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 100;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.18) 0px,
-    rgba(0, 0, 0, 0.18) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-}
-
-.crt-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 101;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 50%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
-}
-
-/* ── Animated Grid Background ─────────────────────── */
-.grid-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-image:
-    linear-gradient(rgba(0, 255, 65, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 65, 0.06) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: grid-move 3s linear infinite;
-}
-
-@keyframes grid-move {
-  from { background-position: 0 0; }
-  to { background-position: 40px 40px; }
-}
-
-/* ── Container & Layout ───────────────────────────── */
 .container {
   display: flex;
   flex-direction: column;
@@ -71,180 +29,84 @@ html, body {
   height: 100vh;
   width: 100vw;
   padding: 20px;
-  position: relative;
 }
 
+/* Added a subtle fade-up animation on load */
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 32px;
-  z-index: 10;
-}
-
-/* ── Terminal Boot Sequence ───────────────────────── */
-.terminal {
-  font-size: 1.2rem;
-  color: #00ff41;
-  text-align: left;
-  min-height: 120px;
-  width: 340px;
-  opacity: 0.9;
-}
-
-.terminal-line {
-  margin: 2px 0;
-  animation: fade-in 0.3s ease;
-}
-
-.cursor {
-  animation: blink 0.8s steps(2) infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ── Main Content (post-boot) ─────────────────────── */
-.main-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.main-content.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── Title ────────────────────────────────────────── */
-.title {
-  font-size: 5rem;
-  letter-spacing: 4px;
-  margin: 0;
-  color: #ffffff;
-  text-shadow:
-    0 0 10px rgba(0, 255, 65, 0.7),
-    0 0 20px rgba(0, 255, 65, 0.4),
-    4px 4px 0px #1a3a1a;
-  position: relative;
-}
-
-/* Glitch effect */
-.title::before,
-.title::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  opacity: 0.8;
-}
-
-.title::before {
-  color: #ff00ff;
-  animation: glitch-1 2.5s infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-}
-
-.title::after {
-  color: #00ffff;
-  animation: glitch-2 3s infinite;
-  clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
-}
-
-@keyframes glitch-1 {
-  0%, 90%, 100% { transform: translate(0); }
-  92% { transform: translate(-3px, 1px); }
-  94% { transform: translate(3px, -1px); }
-  96% { transform: translate(-2px, -1px); }
-  98% { transform: translate(2px, 1px); }
-}
-
-@keyframes glitch-2 {
-  0%, 88%, 100% { transform: translate(0); }
-  90% { transform: translate(3px, -1px); }
-  93% { transform: translate(-3px, 1px); }
-  95% { transform: translate(1px, 2px); }
-  97% { transform: translate(-1px, -2px); }
-}
-
-/* ── Subtitle ─────────────────────────────────────── */
-.subtitle {
-  font-size: 1.6rem;
-  color: #888888;
-  margin: 0 0 1rem 0;
-}
-
-/* ── Button Row ───────────────────────────────────── */
-.btn-row {
-  display: flex;
   gap: 16px;
-  flex-wrap: wrap;
+  animation: fadeUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.brand-logo {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  /* Soft ambient glow around the logo */
+  filter: drop-shadow(0px 4px 12px rgba(255, 255, 255, 0.1));
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  letter-spacing: -0.04em; /* Tighter letter spacing feels more modern */
+  margin: 0;
+  /* Creates a sleek metallic/glass text gradient */
+  background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #888888;
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+/* Premium Button Styling */
+.premium-btn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-}
-
-/* ── Pixel Buttons ────────────────────────────────── */
-.pixel-btn {
-  display: inline-block;
-  font-family: 'VT323', monospace;
-  font-size: 1.5rem;
-  color: #000000;
-  background-color: #00ff41;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #050505;
+  background-color: #ffffff;
   text-decoration: none;
-  padding: 10px 28px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 0.1s ease, background-color 0.2s ease, box-shadow 0.1s ease;
-  box-shadow:
-    inset -4px -4px 0px 0px rgba(0,0,0,0.3),
-    4px 4px 0px 0px #1a3a1a;
+  padding: 14px 36px;
+  border-radius: 9999px; /* Perfect pill shape */
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 14px 0 rgba(255, 255, 255, 0.15);
 }
 
-.pixel-btn.alt {
-  background-color: #333333;
-  color: #00ff41;
-  box-shadow:
-    inset -4px -4px 0px 0px rgba(0,0,0,0.5),
-    4px 4px 0px 0px #1a3a1a;
-}
-
-.pixel-btn:hover {
-  background-color: #00cc33;
+/* Smooth hover and active states */
+.premium-btn:hover {
   transform: translateY(-2px);
-  box-shadow:
-    inset -4px -4px 0px 0px rgba(0,0,0,0.3),
-    6px 6px 0px 0px #1a3a1a;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+  background-color: #f4f4f5;
 }
 
-.pixel-btn.alt:hover {
-  background-color: #444444;
+.premium-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
-.pixel-btn:active {
-  box-shadow: 
-    inset 4px 4px 0px 0px rgba(0,0,0,0.3),
-    0px 0px 0px 0px #1a3a1a;
-  transform: translate(4px, 4px);
+/* Keyframes for initial page load */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
-/* ── Corner Labels ────────────────────────────────── */
-.corner-bl,
-.corner-br {
-  position: fixed;
-  bottom: 12px;
-  font-size: 1rem;
-  color: #444444;
-  z-index: 10;
-}
-
-.corner-bl { left: 16px; }
-.corner-br { right: 16px; }
