@@ -1,0 +1,76 @@
+/* Import a retro pixel font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* Reset default margins */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'VT323', monospace;
+  /* Keeps the text looking sharp and less smoothed out */
+  -webkit-font-smoothing: none; 
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
+.title {
+  font-size: 5rem;
+  letter-spacing: 4px;
+  /* Hard shadow to create a 3D pixel effect */
+  text-shadow: 4px 4px 0px #444444;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  color: #cccccc;
+  margin-bottom: 2rem;
+}
+
+/* The Pixel Button */
+.pixel-btn {
+  display: inline-block;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  color: #000000;
+  background-color: #ffffff;
+  text-decoration: none;
+  padding: 12px 32px;
+  text-transform: uppercase;
+  cursor: pointer;
+  
+  /* Creates a retro blocky border and shadow without using standard borders */
+  box-shadow: 
+    inset -4px -4px 0px 0px rgba(0,0,0,0.3),
+    4px 4px 0px 0px #444444;
+}
+
+/* Button click animation */
+.pixel-btn:active {
+  /* Invert the inner shadow and remove the drop shadow to simulate pushing down */
+  box-shadow: 
+    inset 4px 4px 0px 0px rgba(0,0,0,0.3),
+    0px 0px 0px 0px #444444;
+  /* Physically move the button down and right */
+  transform: translate(4px, 4px);
+}
