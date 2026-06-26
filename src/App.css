@@ -1,19 +1,21 @@
 /* Import a retro pixel font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-/* Reset default margins */
-* {
+/* Reset margins and lock scrolling at the root level */
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #000000;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* This completely disables scrolling */
+  background-color: #000000; /* Pure black background */
   color: #ffffff;
   font-family: 'VT323', monospace;
-  /* Keeps the text looking sharp and less smoothed out */
   -webkit-font-smoothing: none; 
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .container {
@@ -37,7 +39,6 @@ body {
 .title {
   font-size: 5rem;
   letter-spacing: 4px;
-  /* Hard shadow to create a 3D pixel effect */
   text-shadow: 4px 4px 0px #444444;
 }
 
@@ -59,7 +60,6 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   
-  /* Creates a retro blocky border and shadow without using standard borders */
   box-shadow: 
     inset -4px -4px 0px 0px rgba(0,0,0,0.3),
     4px 4px 0px 0px #444444;
@@ -67,10 +67,8 @@ body {
 
 /* Button click animation */
 .pixel-btn:active {
-  /* Invert the inner shadow and remove the drop shadow to simulate pushing down */
   box-shadow: 
     inset 4px 4px 0px 0px rgba(0,0,0,0.3),
     0px 0px 0px 0px #444444;
-  /* Physically move the button down and right */
   transform: translate(4px, 4px);
 }
